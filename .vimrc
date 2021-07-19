@@ -21,10 +21,26 @@ Plug 'lfv89/vim-interestingwords'
 Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'voldikss/vim-translator'
+Plug 'terryma/vim-multiple-cursors'
+
+
 
 "translator
 nnoremap T :TranslateW<cr>
 vnoremap T :TranslateW<cr>
+
+function! SearchWord()
+    let expl=system('sdcv --utf8-output -n ' .
+                \  expand("<cword>"))
+    windo if
+                \ expand("%")=="diCt-tmp" |
+                \ q!|endif
+    40vsp diCt-tmp
+    setlocal buftype=nofile bufhidden=hide noswapfile
+    1s/^/\=expl/
+    1
+endfunction
+nmap <leader>w :call SearchWord()<CR>
 
 "vim-interestingwords
 ",k 设置感兴趣单词
@@ -101,14 +117,12 @@ nnoremap <c-h>    <c-w>h
 nnoremap <c-j>    <c-w>j
 nnoremap <c-k>    <c-w>k
 nnoremap <c-l>    <c-w>l  
+nnoremap cw       :q!<cr>
 nnoremap <leader>h   :vertical res -5<cr> 
 nnoremap <leader>j   :res +5<cr> 
 nnoremap <leader>k   :res -5<cr> 
 nnoremap <leader>l   :vertical res +5<cr> 
 "快速注释
-vnoremap y     "ay
-vnoremap p     "ap
-vnoremap P     "aP
 vnoremap 9     $
 nnoremap 9     $
 inoremap jj    <esc> 
