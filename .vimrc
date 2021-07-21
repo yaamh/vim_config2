@@ -22,8 +22,15 @@ Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'voldikss/vim-translator'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
+"ycm
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
+"snippet
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 "translator
 nnoremap T :TranslateW<cr>
