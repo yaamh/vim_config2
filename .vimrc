@@ -24,6 +24,8 @@ Plug 'voldikss/vim-translator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'voldikss/vim-floaterm'
 
 "ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
@@ -33,8 +35,6 @@ let g:ycm_confirm_extra_conf = 0
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 "translator
-nnoremap T :TranslateW<cr>
-vnoremap T :TranslateW<cr>
 
 function! SearchWord()
     let expl=system('sdcv --utf8-output -n ' .
@@ -47,10 +47,17 @@ function! SearchWord()
     1s/^/\=expl/
     1
 endfunction
-nmap <leader>w :call SearchWord()<CR>
+
+nnoremap <leader>w :TranslateW<cr>
+vnoremap <leader>w :TranslateW<cr>
+"nnoremap <leader>w :call SearchWord()<CR>
 
 "vim-interestingwords
 ",k 设置感兴趣单词
+nnoremap <silent> * :call InterestingWords('n')<cr>
+vnoremap <silent> * :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>* :call UncolorAllWords()<cr>
+
 nnoremap <silent> n :call WordNavigation(1)<cr>
 nnoremap <silent> N :call WordNavigation(0)<cr>
 
@@ -117,6 +124,10 @@ set backspace=indent,eol,start   "解决无法退格问题
 set pastetoggle=<F9> "打开关闭自动缩进
 set undofile
 set undodir=~/.vim/undodir "撤销持久化
+colorscheme space-vim-dark
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 
 nnoremap <c-b> :bnext<cr>
 nnoremap <c-p> :bprev<cr>
@@ -124,7 +135,7 @@ nnoremap <c-h>    <c-w>h
 nnoremap <c-j>    <c-w>j
 nnoremap <c-k>    <c-w>k
 nnoremap <c-l>    <c-w>l  
-nnoremap cw       :q!<cr>
+nnoremap cw       :x<cr>
 nnoremap <leader>h   :vertical res -5<cr> 
 nnoremap <leader>j   :res +5<cr> 
 nnoremap <leader>k   :res -5<cr> 
